@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { REFERENCE_ITEMS } from './data'; // 静的データをインポート
-import { Home } from './components/Home';
-import { DetailPage } from './components/DetailPage';
+import { REFERENCE_ITEMS } from './data.ts'; // 静的データをインポート
+import { Home } from './components/Home.tsx';
+import { DetailPage } from './components/DetailPage.tsx';
 
 // ページの状態を定義。ここでは一覧画面(home)か詳細画面(detail)のみ。
 type PageState = 

@@ -4,6 +4,7 @@ exports.DetailPage = void 0;
 var react_1 = require("react");
 var DetailPage = function (_a) {
     var itemId = _a.itemId, items = _a.items, onBack = _a.onBack;
+    // 選択されたアイテムをメモ化して取得
     var item = (0, react_1.useMemo)(function () { return items.find(function (i) { return i.id === itemId; }); }, [itemId, items]);
     if (!item) {
         return (<div className="error-container">
@@ -27,6 +28,7 @@ var DetailPage = function (_a) {
           </div>
         </div>
         <div className="detail-content">
+          {/* content内のMarkdown（特に表）が正しく表示されるよう white-space: pre-wrap を適用 */}
           {item.content}
         </div>
       </div>

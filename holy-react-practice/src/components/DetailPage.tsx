@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { StudyItem } from '../types';
 
 interface DetailPageProps {
@@ -7,7 +7,8 @@ interface DetailPageProps {
   onBack: () => void;
 }
 
-export const DetailPage: React.FC<DetailPageProps> = ({ itemId, items, onBack }) => {
+export const DetailPage: FC<DetailPageProps> = ({ itemId, items, onBack }) => {
+  // 選択されたアイテムをメモ化して取得
   const item = useMemo(() => items.find(i => i.id === itemId), [itemId, items]);
 
   if (!item) {
@@ -36,6 +37,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ itemId, items, onBack })
           </div>
         </div>
         <div className="detail-content">
+          {/* content内のMarkdown（特に表）が正しく表示されるよう white-space: pre-wrap を適用 */}
           {item.content}
         </div>
       </div>
