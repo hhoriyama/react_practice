@@ -1,54 +1,37 @@
-import { FC } from 'react';
-import { StudyItem } from '../types';
+import React from 'react';
+import ItemA1 from './items/item1';
+import ItemB2 from './items/item2';
+import ItemC3 from './items/item3';
 
-interface HomeProps {
-  items: StudyItem[];
-  onSelect: (id: string) => void;
-}
-
-export const Home: FC<HomeProps> = ({ items, onSelect }) => {
-  const formatDate = (isoString: string) => {
-    // ISO文字列を「YYYY/MM/DD」形式にフォーマット
-    return new Date(isoString).toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-  };
-
+// このコンポーネントがアプリケーションのエントリーポイントです
+// Tailwind CSSが利用可能であることを前提としています。
+const Home: React.FC = () => {
   return (
-    <div className="page-container">
-      <div className="header-row">
-        <h2 className="page-title">リファレンス・ノート一覧</h2>
-        {/* 静的サイトのため、新規作成ボタンはここにはありません */}
-      </div>
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
+      <header className="text-center mb-10 p-6 bg-white rounded-xl shadow-md border-b-4 border-blue-500">
+        <h1 className="text-4xl font-black text-gray-800 tracking-tight">
+          Tech Study Reference Guide
+        </h1>
+        <p className="text-lg text-gray-600 mt-2">
+          学習項目をコンポーネントとして分割した最新の構成
+        </p>
+      </header>
 
-      <div className="list-container">
-        {items.length === 0 ? (
-          <div className="empty-state">
-            <p>データがありません。</p>
-          </div>
-        ) : (
-          items.map((item) => (
-            <div
-              key={item.id}
-              className="card"
-              onClick={() => onSelect(item.id)} // クリック時に親コンポーネントにIDを通知
-              tabIndex={0}
-              role="button"
-            >
-              <div className="card-header">
-                <h3 className="card-title">{item.title}</h3>
-                <span className="badge">{item.category}</span>
-              </div>
-              <div className="card-footer">
-                <span className="date">{formatDate(item.createdAt)}</span>
-                {/* 削除機能もありません */}
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+      <main className="max-w-4xl mx-auto">
+        {/*
+          データが一つずつコンポーネントとして呼び出されます。
+          これで、個別のデータを変更したい場合に、そのアイテムファイルだけを編集すればよくなります。
+        */}
+        <ItemA1 />
+        <ItemB2 />
+        <ItemC3 />
+      </main>
+
+      <footer className="text-center mt-12 p-4 text-gray-500 text-sm">
+        &copy; 2025 Study Guide Project
+      </footer>
     </div>
   );
 };
+
+export default Home;
