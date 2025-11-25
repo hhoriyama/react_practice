@@ -1,48 +1,22 @@
-import { useState } from 'react';
-import { REFERENCE_ITEMS } from './data.ts'; // 静的データをインポート
-// import { Home } from './components/Home.tsx';
-import Home from './components/Home.tsx'; // 名前付きインポートではない
-import { DetailPage } from './components/DetailPage.tsx';
-
-// ページの状態を定義。ここでは一覧画面(home)か詳細画面(detail)のみ。
-type PageState = 
-  | { view: 'home' } 
-  | { view: 'detail'; itemId: string }; 
+import Home from "./components/Home.tsx";
 
 export default function App() {
-  const studyItems = REFERENCE_ITEMS; // 静的データを使用
-  const [pageState, setPageState] = useState<PageState>({ view: 'home' });
-
-  // 記事が選択されたときのハンドラー（詳細画面へ遷移）
-  const handleSelect = (id: string) => setPageState({ view: 'detail', itemId: id });
-  
-  // 戻るボタンのハンドラー（一覧画面へ戻る）
-  const handleBack = () => setPageState({ view: 'home' });
-
   return (
-    <div className="app-layout">
-      <header className="app-header">
-        <h1 className="app-title">React/TS 備忘録 (リファレンス)</h1>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-4 sm:p-6 font-sans">
+      <header className="w-full max-w-4xl bg-white shadow-md rounded-xl p-4 mb-6">
+        <h1 className="text-3xl font-extrabold text-blue-700 tracking-tight">
+          React/TS 備忘録 (リファレンス)
+        </h1>
+        <p className="text-sm text-gray-500 mt-1">
+          コンポーネント統合型の一覧表示
+        </p>
       </header>
 
-      <main className="app-main">
-        {/* ページルーティングの処理 */}
-        {pageState.view === 'home' && (
-          <Home
-            items={studyItems}
-            onSelect={handleSelect}
-          />
-        )}
-        {pageState.view === 'detail' && (
-          <DetailPage
-            itemId={pageState.itemId}
-            items={studyItems}
-            onBack={handleBack}
-          />
-        )}
+      <main className="w-full max-w-4xl bg-white shadow-lg rounded-xl p-6 flex-grow">
+        <Home />
       </main>
 
-      <footer className="app-footer">
+      <footer className="w-full max-w-4xl mt-6 text-center text-sm text-gray-500 p-2">
         &copy; 2025 React Static Reference Guide
       </footer>
     </div>
